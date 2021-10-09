@@ -1,0 +1,28 @@
+mutation GenerateOtpMutation($generateOtpMobile: String!) {
+  generateOtp(mobile: $generateOtpMobile) {
+    authCode
+    errors {
+      field
+      message
+      code
+    }
+  }
+}
+
+mutation ValidateOtpMutation($validateOtpAuthCode: String!, $validateOtpMobile: String!, $validateOtpOtp: String!) {
+  validateOtp(authCode: $validateOtpAuthCode, mobile: $validateOtpMobile, otp: $validateOtpOtp) {
+    token
+    refreshToken
+    csrfToken
+    user {
+      firstName
+      lastName
+      mobile
+      id
+    }
+    errors {
+      field
+      message
+    }
+  }
+}

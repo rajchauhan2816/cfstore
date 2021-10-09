@@ -1,0 +1,32 @@
+query AllCollections($collectionsFirst: Int, $productsFirst: Int, $collectionsChannel: String, $collectionsDate: Date, $collectionsPincode: String) {
+  collections(first: $collectionsFirst, channel: $collectionsChannel, date: $collectionsDate, pincode: $collectionsPincode) {
+    edges {
+      node {
+        name
+        slug
+        products(first: $productsFirst) {
+          edges {
+            node {
+              variants {
+                id
+                name
+                pricing {
+                  price {
+                    net {
+                      currency
+                      amount
+                    }
+                  }
+                }
+                media{
+                  url
+                }
+                quantityAvailable
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,43 @@
+mutation AddressCreate(
+  $accountAddressCreateInput: AddressInput!
+) {
+  accountAddressCreate(input: $accountAddressCreateInput) {
+    errors {
+      message
+      code
+      field
+    }
+  }
+}
+
+mutation AddressUpdate(
+  $accountAddressUpdateId: ID!
+  $accountAddressUpdateInput: AddressInput!
+) {
+  accountAddressUpdate(
+    id: $accountAddressUpdateId
+    input: $accountAddressUpdateInput
+  ) {
+    errors {
+      message
+      code
+      field
+    }
+    address {
+      id
+    }
+  }
+}
+
+mutation AddressDelete($accountAddressDeleteId: ID!) {
+  accountAddressDelete(id: $accountAddressDeleteId) {
+    errors {
+      field
+      message
+      code
+    }
+    address {
+      id
+    }
+  }
+}

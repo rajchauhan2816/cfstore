@@ -1,0 +1,122 @@
+# Fetch Token Cart
+query checkoutTokenDetails($token: UUID){
+  checkout(token:$token){
+    availablePaymentGateways {
+        name
+        id
+        config {
+          field
+          value
+        }
+      }
+    lines{
+      id
+      variant{
+        id
+        name
+        media{
+          url
+        }
+        pricing{
+          date
+          price{
+            net{
+              amount
+            }
+          }
+        }
+      }
+      quantity
+      totalPrice{
+        net{
+        	amount
+        }
+      }
+    }
+  }
+}
+
+# Create New Checkout Token
+mutation CheckoutCreateMutation($checkoutCreateInput: CheckoutCreateInput!) {
+  checkoutCreate(input: $checkoutCreateInput) {
+    checkout {
+      token
+    }
+    errors {
+      message
+    }
+  }
+}
+
+# Order Lines Update mutation
+mutation CheckoutLinesUpdateMutation($checkoutLinesAddToken: UUID, $checkoutLinesAddLines: [CheckoutLineInput]!) {
+  checkoutLinesUpdate(token: $checkoutLinesAddToken, lines: $checkoutLinesAddLines) {
+    checkout {
+      totalPrice{
+        net{
+          amount
+        }
+      }
+      lines {
+        variant {
+          id
+          name
+          media{
+            url
+          }
+          pricing{
+            date
+            price{
+              net{
+                amount
+              }
+            }
+          }
+        }
+        quantity
+        totalPrice {
+          net {
+            amount
+          }
+        }
+      }
+    }
+    errors {
+      message
+    }
+  }
+}
+
+# Shipping Address Update mutation
+mutation CheckoutShippingAddressUpdateMutation($checkoutShippingAddressUpdateShippingAddress: AddressInput!, $checkoutShippingAddressUpdateToken: UUID) {
+  checkoutShippingAddressUpdate(shippingAddress: $checkoutShippingAddressUpdateShippingAddress, token: $checkoutShippingAddressUpdateToken) {
+    checkout {
+      lines {
+        totalPrice {
+          net {
+            amount
+          }
+        }
+      }
+    }
+    errors {
+      message
+    }
+  }
+}
+
+# Billing Address Update mutation
+mutation CheckoutBillingAddressUpdateMutation($checkoutBillingAddressUpdateBillingAddress: AddressInput!, $checkoutBillingAddressUpdateToken: UUID) {
+  checkoutBillingAddressUpdate(billingAddress: $checkoutBillingAddressUpdateBillingAddress, token: $checkoutBillingAddressUpdateToken) {
+    checkout {
+      totalPrice {
+        net {
+          amount
+        }
+      }
+    }
+    errors {
+      message
+    }
+  }
+}

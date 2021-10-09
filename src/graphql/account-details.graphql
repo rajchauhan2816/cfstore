@@ -1,0 +1,81 @@
+fragment AddressFragment on Address {
+    city
+    cityArea
+    companyName
+    country {
+      __typename
+      code
+      country
+    }
+    countryArea
+    firstName
+    id
+    lastName
+    phone
+    postalCode
+    streetAddress1
+    streetAddress2
+  	isDefaultBillingAddress
+  	isDefaultShippingAddress
+}
+
+query AccountDetails($ordersFirst: Int, $thumbnailSize: Int, $checkoutTokensChannel: String, $checkoutTokensDate: Date, $checkoutTokensPincode: String) {
+  me {
+    addresses { 
+    ...AddressFragment  
+    }
+    orders(first: $ordersFirst) {
+      edges {
+        node {
+          id
+          status
+          created
+          billingAddress {
+            ...AddressFragment
+          }
+          shippingAddress {
+            ...AddressFragment
+          }
+          deliveryDate
+          lines {
+            id
+            variantName
+            quantity
+            totalPrice {
+              net {
+                amount
+              }
+            }
+            thumbnail(size: $thumbnailSize) {
+              url
+            }
+          }
+          isPaid
+          paymentStatus
+          payments {
+            gateway
+          }
+          total {
+            net {
+              amount
+            }
+          }
+          errors {
+            message
+          }
+        }
+      }
+    }
+    id
+    lastLogin
+    email
+    firstName
+    lastName
+    isActive
+    type
+    mobile
+    checkoutTokens(channel: $checkoutTokensChannel, date: $checkoutTokensDate, pincode: $checkoutTokensPincode) {
+      token
+    }
+  }
+}

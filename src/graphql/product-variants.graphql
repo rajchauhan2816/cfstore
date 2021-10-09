@@ -1,0 +1,33 @@
+query ProductVariants(
+  $productVariantsFilter: ProductVariantFilterInput
+  $productVariantsPincode: String
+  $productVariantsDate: Date
+  $productVariantsFirst: Int
+  $productVariantsChannel: String
+) {
+  productVariants(
+    filter: $productVariantsFilter
+    pincode: $productVariantsPincode
+    date: $productVariantsDate
+    first: $productVariantsFirst
+    channel: $productVariantsChannel
+  ) {
+    edges {
+      node {
+        name
+        id
+        quantityAvailable
+        media{
+          url
+        }
+        pricing {
+          price {
+            net {
+              amount
+            }
+          }
+        }
+      }
+    }
+  }
+}

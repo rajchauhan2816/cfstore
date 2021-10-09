@@ -1,0 +1,54 @@
+query SKU(
+  $productVariantsPincode: String
+  $productVariantsDate: Date
+  $productVariantsFirst: Int
+  $productVariantsChannel: String
+  $productVariantsIds: [ID]
+) {
+  productVariants(
+    pincode: $productVariantsPincode
+    date: $productVariantsDate
+    first: $productVariantsFirst
+    channel: $productVariantsChannel
+    ids: $productVariantsIds
+  ) {
+    edges {
+      node {
+        name
+        id
+        quantityAvailable
+        media{
+          url
+        }
+        pricing {
+          price {
+            net {
+              amount
+            }
+          }
+        }
+        product{
+          id
+          description
+          name
+          slug
+          variants{
+            id
+            name
+            quantityAvailable
+            media{
+              url
+            }
+            pricing{
+              price{
+                net{
+                  amount
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

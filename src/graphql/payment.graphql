@@ -1,0 +1,94 @@
+
+#  Payment Create Mutation
+#  return Avaialable Payment Methods
+mutation CheckoutPaymentCreateMutation(
+  $checkoutPaymentCreateToken: UUID,
+  $checkoutPaymentCreateInput: PaymentInput!
+) {
+  checkoutPaymentCreate(
+    token: $checkoutPaymentCreateToken,
+    input: $checkoutPaymentCreateInput
+  ) {
+    checkout {
+      id
+    }
+    
+    payment{
+      gateway
+      isActive
+      token
+      order
+      {
+        id
+        total{
+          net{
+            amount
+          }
+        }
+        
+      }
+    }
+    errors {
+      code
+      message
+      field
+    }
+  }
+}
+
+# payment success complete, checkout complete mutaiton
+fragment AddressFragment on Address {
+    city
+    cityArea
+    companyName
+    country {
+      __typename
+      code
+      country
+    }
+    countryArea
+    firstName
+    id
+    lastName
+    phone
+    postalCode
+    streetAddress1
+    streetAddress2
+  	isDefaultBillingAddress
+  	isDefaultShippingAddress
+}
+
+mutation CheckoutCompleteMutation($checkoutCompleteToken: UUID, $checkoutCompletePaymentData: JSONString, $checkoutCompleteDeliveryDate: Date, $thumbnailSize: Int, $checkoutCompleteResellerId: String) {
+  checkoutComplete(token: $checkoutCompleteToken, paymentData: $checkoutCompletePaymentData, deliveryDate: $checkoutCompleteDeliveryDate, resellerId: $checkoutCompleteResellerId) {
+    order {
+      user {
+        firstName
+        lastName
+        mobile
+      }
+      billingAddress {
+        ...AddressFragment
+      }
+      shippingAddress {
+        ...AddressFragment
+      }
+      lines {
+        variantName
+        quantity
+        totalPrice {
+          net {
+            amount
+          }
+        }
+        thumbnail(size: $thumbnailSize) {
+          url
+        }
+        id
+      }
+      isPaid
+    }
+    errors {
+      message
+    }
+  }
+}

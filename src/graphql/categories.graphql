@@ -1,0 +1,20 @@
+query AllCategories($categoriesLevel: Int,$categoriesFirst: Int, $childrenFirst: Int) {
+  categories(level:$categoriesLevel,first: $categoriesFirst) {
+    edges {
+      node {
+        name
+        children(first: $childrenFirst) {
+          edges {
+            node {
+              name
+              id
+              slug
+            }
+          }
+        }
+        id
+        slug
+      }
+    }
+  }
+}
