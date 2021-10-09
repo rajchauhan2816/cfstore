@@ -15,7 +15,6 @@ import Icon from "../icon/Icon";
 import Typography, { H6, Paragraph } from "../Typography";
 import Link from "next/link";
 import { attachShippingAddress, attachBillingAddress } from "@/store/checkoutAddress";
-import { DeepPartial } from ".pnpm/redux@4.1.1/node_modules/redux";
 
 interface Address {
     firstName: string;
@@ -27,6 +26,10 @@ interface Address {
     phone: string;
     countryArea: string;
 }
+
+type DeepPartial<T> = {
+    [P in keyof T]?: DeepPartial<T[P]>;
+};
 interface CheckoutFormMainProps {
     addresses: DeepPartial<Address>[];
 }
