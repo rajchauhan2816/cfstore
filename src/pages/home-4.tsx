@@ -1,5 +1,4 @@
 import Box from "@component/Box";
-import Section3 from "@component/home-1/Section2";
 import Section1 from "@component/home-4/Section1";
 import Section2 from "@component/home-4/Section2";
 import Section4 from "@component/home-4/Section4";
@@ -22,7 +21,6 @@ const Home4 = () => {
         <Box mb="3.75rem">
           <Section2 />
         </Box>
-        <Section3 />
         <Section4 />
         <Section5 />
         <Section6 />
