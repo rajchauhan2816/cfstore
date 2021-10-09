@@ -1,5 +1,5 @@
+import { useAppSelector } from "@/app/hooks";
 import { Chip } from "@component/Chip";
-import { useAppContext } from "@context/app/AppContext";
 import React from "react";
 import useWindowSize from "../../hooks/useWindowSize";
 import Icon from "../icon/Icon";
@@ -8,8 +8,7 @@ import StyledMobileNavigationBar from "./MobileNavigationBar.style";
 
 const MobileNavigationBar: React.FC = () => {
   const width = useWindowSize();
-  const { state } = useAppContext();
-  const { cartList } = state.cart;
+  const cartList = useAppSelector(store => store.cart.items)
 
   return (
     width <= 900 && (

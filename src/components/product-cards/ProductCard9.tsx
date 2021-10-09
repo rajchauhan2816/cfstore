@@ -12,7 +12,7 @@ import Hidden from "../hidden/Hidden";
 import Icon from "../icon/Icon";
 import Modal from "../modal/Modal";
 import NavLink from "../nav-link/NavLink";
-import ProductIntro from "../products/ProductIntro";
+// import ProductIntro from "../products/ProductIntro";
 import Rating from "../rating/Rating";
 import { H5, SemiSpan } from "../Typography";
 import { StyledProductCard9 } from "./ProductCardStyle";
@@ -249,7 +249,7 @@ const ProductCard9: React.FC<ProductCard9Props> = ({
 
       <Modal open={open} onClose={toggleDialog}>
         <Card p="1rem" position="relative">
-          <ProductIntro imgUrl={[imgUrl]} title={title} price={price} />
+          {/* <ProductIntro imgUrl={[imgUrl]} title={title} price={price} /> */}
           <Box
             position="absolute"
             top="0.75rem"

@@ -71,17 +71,17 @@ const CheckoutNavLayout: React.FC = ({ children }) => {
 const stepperList = [
   {
     title: "Cart",
-    icon:"cart",
+    icon: "cart",
     disabled: false,
   },
   {
     title: "Details",
-    icon:"board",
+    icon: "delivery-truck",
     disabled: false,
   },
   {
     title: "Payment",
-    icon:"dollar",
+    icon: "credit-card-2",
     disabled: false,
   },
   // {

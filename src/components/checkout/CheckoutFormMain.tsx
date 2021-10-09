@@ -1,11 +1,11 @@
-import { useAppDispatch, useAppSelector } from "@/app/hooks";
+import { useAppDispatch } from "@/app/hooks";
 import Avatar from "@component/avatar/Avatar";
 import Box from "@component/Box";
 import Card from "@component/Card";
 import FlexBox from "@component/FlexBox";
 import { Formik } from "formik";
 import { useRouter } from "next/router";
-import React, { useEffect } from "react";
+import React from "react";
 import * as yup from "yup";
 import Button from "../buttons/Button";
 import { Card1 } from "../Card1";
@@ -33,6 +33,7 @@ interface CheckoutFormMainProps {
 
 const CheckoutFormMain: React.FC<CheckoutFormMainProps> = ({ addresses }) => {
     const router = useRouter();
+    const [open, setOpen] = React.useState(false);
     const handleFieldValueChange = (value, fieldName, setFieldValue) => () => {
         setFieldValue(fieldName, value.address);
         setFieldValue(fieldName + '_raw', value.rawAddress);
@@ -84,9 +85,9 @@ const CheckoutFormMain: React.FC<CheckoutFormMainProps> = ({ addresses }) => {
         >
             {({
                 values,
-                errors,
-                touched,
-                handleChange,
+                // errors,
+                // touched,
+                // handleChange,
                 handleSubmit,
                 setFieldValue,
             }) => (
@@ -168,6 +169,7 @@ const CheckoutFormMain: React.FC<CheckoutFormMainProps> = ({ addresses }) => {
                                     cursor="pointer"
                                     minHeight="80px"
                                     borderColor={"transparent"}
+                                    onClick={() => { setOpen(!open) }}
                                 >
                                     <FlexBox alignItems="center" justifyContent="center" height="80px" >
                                         <Icon size="50px" color="primary">{"add-address"}</Icon>
@@ -226,6 +228,7 @@ const CheckoutFormMain: React.FC<CheckoutFormMainProps> = ({ addresses }) => {
                                     minHeight="80px"
                                     alignContent="center"
                                     justifyContent="center"
+                                    onClick={() => { setOpen(!open) }}
                                 >
 
                                     <FlexBox alignItems="center" justifyContent="center" height="80px" >

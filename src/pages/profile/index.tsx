@@ -1,5 +1,5 @@
-import { useAppDispatch, useAppSelector } from "@/app/hooks";
-import { fetchAccountDetails } from "@/store/account-details";
+import { useAppSelector } from "@/app/hooks";
+// import { fetchAccountDetails } from "@/store/account-details";
 import Avatar from "@component/avatar/Avatar";
 import Box from "@component/Box";
 import Button from "@component/buttons/Button";
@@ -15,7 +15,7 @@ import React from "react";
 
 const Profile = () => {
   const { user } = useAppSelector((store) => store.auth);
-  const dispatch = useAppDispatch()
+  // const dispatch = useAppDispatch()
 
   return (
     <div>
@@ -43,7 +43,7 @@ const Profile = () => {
                   alignItems="center"
                 >
                   <div>
-                    <H5 my="0px">{`${user?.firstName || "captain fresh"} ${user?.lastName || ""}`}</H5>
+                    <H5 my="0px">{`${user?.firstName || "-"} ${user?.lastName || ""}`}</H5>
 
                     {/* <FlexBox alignItems="center">
                       <Typography fontSize="14px" color="text.hint">
@@ -97,7 +97,7 @@ const Profile = () => {
           <Small color="text.muted" mb="4px" textAlign="left">
             First Name
           </Small>
-          <span>{user?.firstName || "captain"}</span>
+          <span>{user?.firstName || "-"}</span>
         </FlexBox>
         <FlexBox flexDirection="column" p="0.5rem">
           <Small color="text.muted" mb="4px" textAlign="left">

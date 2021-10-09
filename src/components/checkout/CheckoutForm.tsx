@@ -1,5 +1,3 @@
-import { useAppDispatch } from "@/app/hooks";
-import { createCheckout } from "@/store/checkout";
 import { Formik } from "formik";
 import Link from "next/link";
 import { useRouter } from "next/router";
@@ -18,7 +16,6 @@ const CheckoutForm = () => {
   const [sameAsShipping, setSameAsShipping] = useState(false);
   const router = useRouter();
 
-  const dispatch = useAppDispatch();
   const handleFormSubmit = async (values) => {
     console.log(values);
     const shippingAddress = {
@@ -44,10 +41,10 @@ const CheckoutForm = () => {
     }
     console.log("shippingAddress", shippingAddress);
     console.log("billing", billingAddress);
-    dispatch(createCheckout({
-      shippingAddress,
-      billingAddress
-    }));
+    // dispatch(createCheckout({
+    //   shippingAddress,
+    //   billingAddress
+    // }));
     router.push("/payment");
   };
 

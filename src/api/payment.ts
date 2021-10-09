@@ -10,10 +10,10 @@ import urqlClient from "./graphql";
  * @type Category
  */
 export function useCheckoutPaymentCreateMutaion(variables: CheckoutPaymentCreateMutationMutationVariables) {
-    return urqlClient.mutation(CheckoutPaymentCreateMutationDocument, variables).toPromise();
+    return urqlClient.mutation(CheckoutPaymentCreateMutationDocument, variables, { requestPolicy: 'network-only' }).toPromise();
 }
 
 
 export function useCheckoutCompleteMutaion(variables: CheckoutCompleteMutationMutationVariables) {
-    return urqlClient.mutation(CheckoutCompleteMutationDocument, variables).toPromise();
+    return urqlClient.mutation(CheckoutCompleteMutationDocument, variables, { requestPolicy: 'network-only' }).toPromise();
 }

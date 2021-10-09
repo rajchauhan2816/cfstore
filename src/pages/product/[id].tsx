@@ -1,11 +1,9 @@
-import { ProductVariant } from "@/generated/graphql";
 import { fetchSku } from "@/store/sku";
 import Box from "@component/Box";
 import FlexBox from "@component/FlexBox";
 import NavbarLayout from "@component/layout/NavbarLayout";
 import ProductDescription from "@component/products/ProductDescription";
 import ProductIntro from "@component/products/ProductIntro";
-import ProductReview from "@component/products/ProductReview";
 import RelatedProducts from "@component/products/RelatedProducts";
 import { H5 } from "@component/Typography";
 import React, { useState, useEffect } from "react";
@@ -14,13 +12,9 @@ interface IQueryParams {
   id: string;
 }
 
-type DeepPartial<T> = {
-  [P in keyof T]?: DeepPartial<T[P]>;
-};
-
-type PartialProductVariant = DeepPartial<ProductVariant>
+// type PartialProductVariant = DeepPartial<ProductVariant>
 export interface ProductIntroProps {
-  imgUrl?: string[];
+  imgUrl?: string;
   title: string;
   price: number;
   quantityAvailable: number,
@@ -39,7 +33,7 @@ const ProductDetails = ({ query: { id = "" } }: { query: IQueryParams }) => {
   const [sku, setSku] = useState({
     title: "",
     price: 0,
-    imgUrl: [""],
+    imgUrl: "",
     quantityAvailable: 0,
     id,
     description: []
@@ -55,7 +49,7 @@ const ProductDetails = ({ query: { id = "" } }: { query: IQueryParams }) => {
 
       const sku = {
         description: desc.blocks.map(block => block.data.text),
-        imgUrl: _sku.media.map((media) => { return media.url }),
+        imgUrl: _sku.media[0] && _sku.media[0].url,
         title: _sku.name,
         price: _sku.pricing.price.net.amount,
         quantityAvailable: _sku.quantityAvailable,

@@ -13,7 +13,7 @@ import { mutation, query } from "./graphql";
  * @type Category
  */
 export function useCheckoutCreateMutaion(variables: CheckoutCreateMutationMutationVariables) {
-    return mutation(CheckoutCreateMutationDocument, variables).toPromise();
+    return mutation(CheckoutCreateMutationDocument, variables, { requestPolicy: 'network-only' }).toPromise();
 }
 
 /**
@@ -22,7 +22,7 @@ export function useCheckoutCreateMutaion(variables: CheckoutCreateMutationMutati
  * @returns checkoutlinesupdate
  */
 export function useCheckoutLinesUpdateMutation(variables: CheckoutLinesUpdateMutationMutationVariables) {
-    return mutation(CheckoutLinesUpdateMutationDocument, variables).toPromise();
+    return mutation(CheckoutLinesUpdateMutationDocument, variables, { requestPolicy: 'network-only' }).toPromise();
 }
 
 /**
@@ -32,7 +32,7 @@ export function useCheckoutLinesUpdateMutation(variables: CheckoutLinesUpdateMut
  */
 
 export function useCheckoutTokenDetailsQuery(variables: CheckoutTokenDetailsQueryVariables) {
-    return query(CheckoutTokenDetailsDocument, variables).toPromise();
+    return query(CheckoutTokenDetailsDocument, variables, { requestPolicy: 'network-only' }).toPromise();
 }
 
 /**
@@ -42,7 +42,7 @@ export function useCheckoutTokenDetailsQuery(variables: CheckoutTokenDetailsQuer
  */
 
 export function useCheckoutShippingAddressUpdateMutation(variables: CheckoutShippingAddressUpdateMutationMutationVariables) {
-    return mutation(CheckoutShippingAddressUpdateMutationDocument, variables).toPromise();
+    return mutation(CheckoutShippingAddressUpdateMutationDocument, variables, { requestPolicy: 'network-only' }).toPromise();
 }
 
 /**
@@ -52,5 +52,5 @@ export function useCheckoutShippingAddressUpdateMutation(variables: CheckoutShip
  */
 
 export function useCheckoutBillingAddressUpdateMutation(variables: CheckoutBillingAddressUpdateMutationMutationVariables) {
-    return mutation(CheckoutBillingAddressUpdateMutationDocument, variables).toPromise();
+    return mutation(CheckoutBillingAddressUpdateMutationDocument, variables, { requestPolicy: 'network-only' }).toPromise();
 }

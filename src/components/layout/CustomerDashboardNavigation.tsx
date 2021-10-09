@@ -45,7 +45,7 @@ const CustomerDashboardNavigation = () => {
                 </Box>
                 <span>{item.title}</span>
               </FlexBox>
-              <span>{item.count}</span>
+              {/* <span>{item.count}</span> */}
             </StyledDashboardNav>
           ))}
         </Fragment>
@@ -66,7 +66,7 @@ const linkList = [
         href: "/orders",
         title: "Orders",
         iconName: "bag",
-        count: 5,
+        // count: 5,
       },
       // {
       //   href: "/wish-list",
@@ -89,13 +89,13 @@ const linkList = [
         href: "/profile",
         title: "Profile Info",
         iconName: "user",
-        count: 3,
+        // count: 3,
       },
       {
         href: "/address",
         title: "Addresses",
         iconName: "pin",
-        count: 16,
+        // count: 16,
       },
       // {
       //   href: "/payment-methods",

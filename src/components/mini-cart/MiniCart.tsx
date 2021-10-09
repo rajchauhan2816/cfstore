@@ -11,7 +11,7 @@ import Icon from "../icon/Icon";
 import Typography, { H5, Paragraph, Tiny } from "../Typography";
 import { StyledMiniCart } from "./MiniCartStyle";
 
-import { addItemToCart } from '@/store/cart'
+import { addItemToCart, updateTokenCart } from '@/store/cart'
 
 type MiniCartProps = {
   toggleSidenav?: () => void;
@@ -21,12 +21,31 @@ const MiniCart: React.FC<MiniCartProps> = ({ toggleSidenav }) => {
   const dispatch = useAppDispatch()
   const cartList = useAppSelector(store => store.cart.items)
 
+  // const handleCartAmountChange = useCallback(
+  //   (amount, product) => () => {
+  //     dispatch(addItemToCart({
+  //       ...product,
+  //       qty: amount,
+  //     }))
+  //   },
+  //   []
+  // );
+  const { isLoggedIn } = useAppSelector(store => store.auth);
   const handleCartAmountChange = useCallback(
     (amount, product) => () => {
-      dispatch(addItemToCart({
+      const payload = {
         ...product,
         qty: amount,
-      }))
+      }
+      if (amount >= 0) {
+        if (isLoggedIn) {
+          dispatch(updateTokenCart([payload]));
+        }
+        else {
+          dispatch(addItemToCart(payload))
+        }
+
+      }
     },
     []
   );

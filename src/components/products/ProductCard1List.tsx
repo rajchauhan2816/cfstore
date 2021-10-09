@@ -22,7 +22,7 @@ const ProductCard1List: React.FC<ProductCard1ListProps> = ({ sku }) => {
     <div>
       <Grid container spacing={6}>
         {sku.map((item, ind) => (
-          <Grid item lg={4} sm={6} xs={12} key={ind}>
+          <Grid item lg={4} sm={6} xs={6} key={ind}>
             <ProductCard1 {...item} key={item.id} />
           </Grid>
         ))}

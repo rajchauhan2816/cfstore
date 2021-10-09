@@ -18,7 +18,6 @@ import React, { useCallback, useEffect, useState } from "react";
 
 // import { fetchProductVariants } from '@/store/product-variants'
 import { fetchCategories } from '@/store/category';
-import { fetchAccountDetails } from "@/store/account-details";
 import { fetchCollections } from "@/store/collection";
 
 interface ISku {

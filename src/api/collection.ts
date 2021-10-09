@@ -7,5 +7,5 @@ import urqlClient from "./graphql";
  * @type Colletion
  */
 export function useCollectionsQuery(variables: AllCollectionsQueryVariables) {
-    return urqlClient.query(AllCollectionsDocument, variables).toPromise();
+    return urqlClient.query(AllCollectionsDocument, variables, { requestPolicy: 'network-only' }).toPromise();
 }

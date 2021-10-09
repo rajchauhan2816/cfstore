@@ -1,12 +1,6 @@
 import { useAddressDeleteMutation } from "@/api/address";
-import { useAppDispatch, useAppSelector } from "@/app/hooks";
-import Box from "@/components/Box";
-
-import CheckBox from "@/components/CheckBox";
-import FlexBox from "@/components/FlexBox";
-import Menu from "@/components/Menu";
-import MenuItem from "@/components/MenuItem";
-import { fetchAccountDetails } from "@/store/account-details";
+import { useAppSelector } from "@/app/hooks";
+// import { fetchAccountDetails } from "@/store/account-details";
 import Button from "@component/buttons/Button";
 import IconButton from "@component/buttons/IconButton";
 
@@ -21,59 +15,46 @@ import Link from "next/link";
 import React from "react";
 
 
-const DefaultAddress = () => {
+// const DefaultAddress = () => {
 
-  return (
-    <Menu
-      direction='right'
-      handler={
-        <FlexBox
-          className='dropdown handler'
-          alignItems='center'
-          height='15px'
-          mr='1.25rem'
-        >
-          <Icon variant="small" defaultcolor="currentColor">
-            3-vertical-dots
-          </Icon>
-        </FlexBox>
-      }
-    >
-      <MenuItem >
-        {/* Functionality Enhancement */}
-        <Box>
-          <CheckBox
-            label="Set Default Shipping Address"
-            color="secondary"
-            mb={"0.5rem"}
-            onChange={(e) => { console.log(e.target.value) }}
-            value="Shipping Address"
-            name="defaultAddress"
-          />
-        </Box>
-      </MenuItem>
-      <MenuItem>
-        <Box>
-          <CheckBox
-            label="Set Default Billing Address"
-            color="secondary"
-            mb={"0.5rem"}
-            onChange={(e) => { console.log(e.target.value) }}
-            name="defaultAddress"
-            value="Billing Address"
-          />
-        </Box>
-      </MenuItem>
-
-
-    </Menu>
-  );
-}
+//   return (
+//     <Menu
+//       direction='right'
+//       handler={
+//         <FlexBox
+//           className='dropdown handler'
+//           alignItems='center'
+//           height='15px'
+//           mr='1.25rem'
+//         >
+//           <Icon variant="small" defaultcolor="currentColor">
+//             3-vertical-dots
+//           </Icon>
+//         </FlexBox>
+//       }
+//     >
+//       <MenuItem >
+//         {/* Functionality Enhancement */}
+//         <Box>
+//           <FlexBox>
+//             Set As Default Shipping Address
+//           </FlexBox>
+//         </Box>
+//       </MenuItem>
+//       <MenuItem>
+//         <Box>
+//           <FlexBox>
+//             Set As Default Billing Address
+//           </FlexBox>
+//         </Box>
+//       </MenuItem>
+//     </Menu>
+//   );
+// }
 
 const AddressList = () => {
-  const { accountDetails } = useAppSelector(store => store.accountDetails);
-  const [addresses, setAddresses] = React.useState([]);
-  const dispatch = useAppDispatch();
+  const { accountDetails: { addresses } } = useAppSelector(store => store.accountDetails);
+  // const dispatch = useAppDispatch();
   const handleDelete = async (addressId) => {
     const res = await useAddressDeleteMutation({
       accountAddressDeleteId: addressId
@@ -124,9 +105,9 @@ const AddressList = () => {
                 delete
               </Icon>
             </IconButton>
-            <IconButton size="small" onClick={() => { }}>
+            {/* <IconButton size="small" onClick={() => { }}>
               <DefaultAddress />
-            </IconButton>
+            </IconButton> */}
           </Typography>
         </TableRow>
       ))}

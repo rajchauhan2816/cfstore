@@ -14,7 +14,7 @@ type Props = {
 const AppLayout: React.FC<Props> = ({
   children,
   navbar,
-  title = "React Next.js Ecommerce Template",
+  title = "The Good Fish Company",
 }) => (
   <StyledAppLayout>
     <Head>

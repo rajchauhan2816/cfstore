@@ -1,25 +1,17 @@
 import { useAppSelector } from "@/app/hooks";
-import Accordion from "@component/accordion/Accordion";
-import AccordionHeader from "@component/accordion/AccordionHeader";
 import Box from "@component/Box";
-import Divider from "@component/Divider";
 import Grid from "@component/grid/Grid";
 import GroceryHeader from "@component/header/GroceryHeader";
-import Icon from "@component/icon/Icon";
 import MobileCategoryImageBox from "@component/mobile-category-nav/MobileCategoryImageBox";
 import { MobileCategoryNavStyle } from "@component/mobile-category-nav/MobileCategoryNavStyle";
 import MobileNavigationBar from "@component/mobile-navigation/MobileNavigationBar";
 import Typography from "@component/Typography";
-import navigations from "@data/navigations";
 import Link from "next/link";
-import React, { Fragment, useEffect, useState } from "react";
+import React from "react";
 
 const MobileCategoryNav = () => {
-  const [category, setCategory] = useState(null);
-  const [suggestedList, setSuggestedList] = useState([]);
-  const [subCategoryList, setSubCategoryList] = useState([]);
 
-  const { categories, error:_error ,loading:_loading } = useAppSelector(store => store.category);
+  const { categories, error: _error, loading: _loading } = useAppSelector(store => store.category);
   const AllCategories = categories.map((x) => {
     const category = {
       title: x.name,
@@ -30,17 +22,6 @@ const MobileCategoryNav = () => {
     return category;
   })
 
-  const handleCategoryClick = (cat) => () => {
-    let menuData = cat.menuData;
-    if (menuData) {
-      setSubCategoryList(menuData.categories || menuData);
-    } else setSubCategoryList([]);
-    setCategory(cat);
-  };
-
-  useEffect(() => {
-    setSuggestedList(suggestion);
-  }, []);
 
   return (
     <MobileCategoryNavStyle>
@@ -89,48 +70,5 @@ const MobileCategoryNav = () => {
     </MobileCategoryNavStyle>
   );
 };
-
-const suggestion = [
-  {
-    title: "Belt",
-    href: "/belt",
-    imgUrl: "/assets/images/products/categories/belt.png",
-  },
-  {
-    title: "Hat",
-    href: "/Hat",
-    imgUrl: "/assets/images/products/categories/hat.png",
-  },
-  {
-    title: "Watches",
-    href: "/Watches",
-    imgUrl: "/assets/images/products/categories/watch.png",
-  },
-  {
-    title: "Sunglasses",
-    href: "/Sunglasses",
-    imgUrl: "/assets/images/products/categories/sunglass.png",
-  },
-  {
-    title: "Sneakers",
-    href: "/Sneakers",
-    imgUrl: "/assets/images/products/categories/sneaker.png",
-  },
-  {
-    title: "Sandals",
-    href: "/Sandals",
-    imgUrl: "/assets/images/products/categories/sandal.png",
-  },
-  {
-    title: "Formal",
-    href: "/Formal",
-    imgUrl: "/assets/images/products/categories/shirt.png",
-  },
-  {
-    title: "Casual",
-    href: "/Casual",
-    imgUrl: "/assets/images/products/categories/t-shirt.png",
-  },
-];
 
 export default MobileCategoryNav;

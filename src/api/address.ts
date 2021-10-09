@@ -1,13 +1,13 @@
-import { AddressCreateDocument,AddressCreateMutationVariables, AddressUpdateDocument, AddressUpdateMutationVariables, AddressDeleteDocument, AddressDeleteMutationVariables  } from "@/generated/graphql";
+import { AddressCreateDocument, AddressCreateMutationVariables, AddressUpdateDocument, AddressUpdateMutationVariables, AddressDeleteDocument, AddressDeleteMutationVariables } from "@/generated/graphql";
 
 import urqlClient from "./graphql";
 /**
  * @returns Create Account Address
  * @type AccountAddressCreate
  */
-export function useAddressCreateMutation(variables:AddressCreateMutationVariables) {
+export function useAddressCreateMutation(variables: AddressCreateMutationVariables) {
     try {
-        return urqlClient.mutation(AddressCreateDocument, variables).toPromise();
+        return urqlClient.mutation(AddressCreateDocument, variables, { requestPolicy: 'network-only' }).toPromise();
     } catch (error) {
         console.log(error);
     }
@@ -17,11 +17,11 @@ export function useAddressCreateMutation(variables:AddressCreateMutationVariable
  * @returns Update Account Address
  * @type AccountAddressUpdate
  */
-export function useAddressUpdateMutation(variables:AddressUpdateMutationVariables){
+export function useAddressUpdateMutation(variables: AddressUpdateMutationVariables) {
     try {
-        return urqlClient.mutation(AddressUpdateDocument, variables).toPromise();
+        return urqlClient.mutation(AddressUpdateDocument, variables, { requestPolicy: 'network-only' }).toPromise();
     } catch (error) {
-            console.log(error);
+        console.log(error);
     }
 }
 
@@ -29,11 +29,11 @@ export function useAddressUpdateMutation(variables:AddressUpdateMutationVariable
  * @returns Delete Account Address
  * @type AccountAddressDelete
  */
- export function useAddressDeleteMutation(variables:AddressDeleteMutationVariables){
+export function useAddressDeleteMutation(variables: AddressDeleteMutationVariables) {
     try {
-        return urqlClient.mutation(AddressDeleteDocument, variables).toPromise();
+        return urqlClient.mutation(AddressDeleteDocument, variables, { requestPolicy: 'network-only' }).toPromise();
     } catch (error) {
-            console.log(error);
+        console.log(error);
     }
 }
 

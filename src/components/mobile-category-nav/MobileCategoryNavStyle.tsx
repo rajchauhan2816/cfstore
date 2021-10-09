@@ -40,7 +40,8 @@ export const MobileCategoryNavStyle = styled.div`
     top: ${layoutConstant.mobileHeaderHeight};
     bottom: ${layoutConstant.mobileNavHeight};
     // left: 90px;
-    left: 0px;
+    left: 10px;
+    right:10px;
     padding: 0.5rem 1rem;
     flex: 1 1 0;
     overflow-y: auto;

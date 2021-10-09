@@ -1,12 +1,11 @@
 import { useAppDispatch, useAppSelector } from "@/app/hooks";
-import { addItemToCart } from "@/store/cart";
+import { addItemToCart, updateTokenCart } from "@/store/cart";
 import LazyImage from "@component/LazyImage";
 // import { useAppContext } from "@context/app/AppContext";
 // import { CartItem } from "@reducer/cartReducer";
 // import Link from "next/link";
 // import { useRouter } from "next/router";
-import React, { useCallback, useState } from "react";
-import Avatar from "../avatar/Avatar";
+import React, { useCallback } from "react";
 import Box from "../Box";
 import Button from "../buttons/Button";
 import FlexBox from "../FlexBox";
@@ -16,7 +15,7 @@ import Icon from "../icon/Icon";
 import { H1, H2, H3, SemiSpan } from "../Typography";
 
 export interface ProductIntroProps {
-  imgUrl?: string[];
+  imgUrl?: string;
   title: string;
   price: number;
   quantityAvailable: number,
@@ -29,22 +28,25 @@ const ProductIntro: React.FC<ProductIntroProps> = ({
   price = 200,
   id,
 }) => {
-  const [selectedImage, setSelectedImage] = useState(0);
   // const router = useRouter();
   // const routerId = router.query.id as string;
   const { items } = useAppSelector(store => store.cart);
   const cartItem = items.find((item) => item.id === id);
+  const { isLoggedIn } = useAppSelector(store => store.auth);
 
-  const handleImageClick = (ind) => () => {
-    setSelectedImage(ind);
-  };
 
   const dispatch = useAppDispatch();
   const handleCartAmountChange = useCallback(
     (amount) => () => {
-      const payload = { id, name: title, imgUrl: imgUrl[0], price, qty: amount }
+      const payload = { id, name: title, imgUrl, price, qty: amount }
       if (amount >= 0) {
-        dispatch(addItemToCart(payload))
+        if (isLoggedIn) {
+          dispatch(updateTokenCart([payload]));
+        }
+        else {
+          dispatch(addItemToCart(payload))
+        }
+
       }
     },
     []
@@ -57,7 +59,7 @@ const ProductIntro: React.FC<ProductIntroProps> = ({
           <Box>
             <FlexBox justifyContent="center" mb="50px">
               <LazyImage
-                src={imgUrl[selectedImage]}
+                src={imgUrl}
                 alt={title}
                 height="300px"
                 width="auto"
@@ -65,30 +67,23 @@ const ProductIntro: React.FC<ProductIntroProps> = ({
                 objectFit="contain"
               />
             </FlexBox>
-            <FlexBox overflow="auto">
-              {imgUrl.map((url, ind) => (
-                <Box
-                  size={70}
-                  minWidth={70}
-                  bg="white"
-                  borderRadius="10px"
-                  display="flex"
-                  justifyContent="center"
-                  alignItems="center"
-                  cursor="pointer"
-                  border="1px solid"
-                  key={ind}
-                  ml={ind === 0 && "auto"}
-                  mr={ind === imgUrl.length - 1 ? "auto" : "10px"}
-                  borderColor={
-                    selectedImage === ind ? "primary.main" : "gray.400"
-                  }
-                  onClick={handleImageClick(ind)}
-                >
-                  <Avatar src={url} borderRadius="10px" size={40} />
-                </Box>
-              ))}
-            </FlexBox>
+            {/* <FlexBox overflow="auto">
+              <Box
+                size={70}
+                minWidth={70}
+                bg="white"
+                borderRadius="10px"
+                display="flex"
+                justifyContent="center"
+                alignItems="center"
+                cursor="pointer"
+                border="1px solid"
+                borderColor={"primary.main"}
+              >
+                <Avatar src={imgUrl} borderRadius="10px" size={40} />
+              </Box>
+              ))
+            </FlexBox> */}
           </Box>
         </Grid>
 
@@ -168,11 +163,7 @@ const ProductIntro: React.FC<ProductIntroProps> = ({
 };
 
 ProductIntro.defaultProps = {
-  imgUrl: [
-    "/assets/images/products/headphone.png",
-    "/assets/images/products/hiclipart.com (16).png",
-    "/assets/images/products/hiclipart.com (18).png",
-  ],
+  imgUrl: "/assets/images/products/headphone.png",
   title: "Mi Note 11 Pro",
   price: 1100,
 };

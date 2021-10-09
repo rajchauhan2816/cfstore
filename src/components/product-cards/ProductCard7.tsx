@@ -1,5 +1,5 @@
-import { useAppDispatch } from "@/app/hooks";
-import { addItemToCart } from "@/store/cart";
+import { useAppDispatch, useAppSelector } from "@/app/hooks";
+import { addItemToCart, updateTokenCart } from "@/store/cart";
 import Box from "@component/Box";
 import Image from "@component/Image";
 import Link from "next/link";
@@ -28,16 +28,20 @@ const ProductCard7: React.FC<ProductCard7Props & SpaceProps> = ({
   imgUrl,
   ...props
 }) => {
+  const { isLoggedIn } = useAppSelector(store => store.auth);
   const dispatch = useAppDispatch()
   const handleCartAmountChange = useCallback(
     (amount) => () => {
-      dispatch(addItemToCart({
-          qty: amount,
-          name,
-          price,
-          imgUrl,
-          id,
-      }));
+      const payload = { id, name, imgUrl, price, qty: amount }
+      if (amount >= 0) {
+        if (isLoggedIn) {
+          dispatch(updateTokenCart([payload]));
+        }
+        else {
+          dispatch(addItemToCart(payload))
+        }
+
+      }
     },
     []
   );

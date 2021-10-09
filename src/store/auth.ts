@@ -1,8 +1,6 @@
-import { store } from './index';
 import { useAccoutUpdateMutation } from "@/api/account-update";
 import { useGenerateOtpMutation, useValidateOtpMutation } from "@/api/auth";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { clearAccountDetails } from './account-details';
 
 /**
  * Async function that generates otp.

@@ -8,5 +8,5 @@ import urqlClient from "./graphql";
  * @type Category
  */
 export function useCategoriesQuery() {
-    return urqlClient.query(AllCategoriesDocument, { categoriesLevel: 0, categoriesFirst: limit, childrenFirst: limit }).toPromise();
+    return urqlClient.query(AllCategoriesDocument, { categoriesLevel: 0, categoriesFirst: limit, childrenFirst: limit }, { requestPolicy: 'network-only' }).toPromise();
 }

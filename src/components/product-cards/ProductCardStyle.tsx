@@ -228,16 +228,16 @@ export const StyledProductCard7 = styled.div`
     text-overflow: ellipsis;
   }
 
-  @media only screen and (max-width: 425px) {
-    flex-wrap: wrap;
-    img {
-      height: auto;
-      min-width: 100%;
-    }
-    .product-details {
-      // padding: 1rem;
-    }
-  }
+  // @media only screen and (max-width: 425px) {
+  //   flex-wrap: wrap;
+  //   img {
+  //     height: auto;
+  //     min-width: 100%;
+  //   }
+  //   .product-details {
+  //     // padding: 1rem;
+  //   }
+  // }
   ${space}
 `;
 

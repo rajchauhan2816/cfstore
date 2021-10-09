@@ -2,7 +2,6 @@ import { setCheckoutToken } from '@/store/account-details';
 import { useCheckoutCreateMutaion, useCheckoutLinesUpdateMutation, useCheckoutTokenDetailsQuery } from "@/api/checkout";
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { store } from '@/store'
-import { cloneDeep } from 'lodash'
 
 type Item = { id: string, name: string, imgUrl: string, price: number, qty: number }
 
@@ -10,7 +9,7 @@ const updateTokenCart = createAsyncThunk(
     'cart/updateCart',
     async (items: Item[]) => {
         const { accountDetails: { accountDetails: { checkoutToken } } } = store.getState()
-        const { data: { checkoutLinesUpdate: { checkout: { lines } } }, error } = await useCheckoutLinesUpdateMutation({ checkoutLinesAddToken: checkoutToken, checkoutLinesAddLines: items.map(item => ({ variantId: item.id, quantity: item.qty })) })
+        const { data: { checkoutLinesUpdate: { checkout: { lines } } }, error: _ } = await useCheckoutLinesUpdateMutation({ checkoutLinesAddToken: checkoutToken, checkoutLinesAddLines: items.map(item => ({ variantId: item.id, quantity: item.qty })) })
         return lines.map(({ variant, quantity }) => ({ id: variant.id, name: variant.name, imgUrl: variant.media[0].url, price: variant.pricing.price.net.amount, qty: quantity }))
     }
 )
