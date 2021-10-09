@@ -7,8 +7,10 @@ function geToken() {
     return token ?? ""
 }
 
+console.log(process.env.NEXT_PUBLIC_TEST);
+
 const client = createClient({
-    url: "http://localhost:8000/graphql/",
+    url: "https://saleor.code-server.repulse.tech/graphql/",
     fetchOptions: () => {
         return {
             headers: {
